@@ -2,6 +2,10 @@
 
 A tiny, polished Android app for parents to quickly play short reminder messages for kids using a playful emoji soundboard.
 
+<p align="center">
+  <img src="screenshots/screenshot.png" alt="Parent Soundboard screenshot" width="320"/>
+</p>
+
 ## Features
 
 - 3×3 grid of emoji soundboard buttons
