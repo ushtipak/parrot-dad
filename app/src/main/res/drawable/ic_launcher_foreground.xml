@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple parrot silhouette placeholder for launcher icon foreground -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#6750A4"
+        android:pathData="M54,20 C38,20 26,32 26,48 C26,58 31,67 39,73 L39,88 L69,88 L69,73 C77,67 82,58 82,48 C82,32 70,20 54,20 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M46,44 C46,47.3 43.3,50 40,50 C36.7,50 34,47.3 34,44 C34,40.7 36.7,38 40,38 C43.3,38 46,40.7 46,44 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M74,44 C74,47.3 71.3,50 68,50 C64.7,50 62,47.3 62,44 C62,40.7 64.7,38 68,38 C71.3,38 74,40.7 74,44 Z"/>
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M54,55 C51,55 48,57 47,60 L61,60 C60,57 57,55 54,55 Z"/>
+</vector>

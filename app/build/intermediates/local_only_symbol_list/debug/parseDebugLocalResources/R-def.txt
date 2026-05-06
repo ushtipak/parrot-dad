@@ -1,0 +1,17 @@
+R_DEF: Internal format may change without notice
+local
+color ic_launcher_background
+drawable ic_launcher_foreground
+mipmap ic_launcher
+mipmap ic_launcher_round
+raw sound_bedtime
+raw sound_hands
+raw sound_off
+raw sound_please
+raw sound_quiet
+raw sound_shoes
+raw sound_teeth
+raw sound_towel
+raw sound_toys
+string app_name
+style Theme.ParrotDad
