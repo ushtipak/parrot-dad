@@ -82,7 +82,7 @@ fun SoundboardScreen(items: List<SoundItem>) {
         ) {
             // App title bar
             Text(
-                text = "🦜 Parent Soundboard",
+                text = "🦜 ParrotDad",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary,
