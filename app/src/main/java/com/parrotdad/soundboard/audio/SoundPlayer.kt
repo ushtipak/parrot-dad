@@ -45,6 +45,39 @@ class SoundPlayer {
     }
 
     /**
+     * Plays audio from an absolute [filePath] (used for custom user recordings).
+     * Falls back to [fallbackResId] if the file doesn't exist or fails to play.
+     */
+    fun playCustomOrFallback(context: Context, filePath: String?, fallbackResId: Int) {
+        if (filePath != null && java.io.File(filePath).exists()) {
+            stopAndRelease()
+            try {
+                mediaPlayer = MediaPlayer().apply {
+                    setDataSource(filePath)
+                    setOnErrorListener { mp, what, extra ->
+                        Log.w(TAG, "MediaPlayer error on file: what=$what extra=$extra")
+                        mp.release()
+                        mediaPlayer = null
+                        true
+                    }
+                    setOnCompletionListener { mp ->
+                        mp.release()
+                        mediaPlayer = null
+                    }
+                    prepare()
+                    start()
+                }
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to play file $filePath, falling back to resource", e)
+                mediaPlayer = null
+                play(context, fallbackResId)
+            }
+        } else {
+            play(context, fallbackResId)
+        }
+    }
+
+    /**
      * Stops playback and releases the MediaPlayer.
      * Safe to call even when nothing is playing.
      */

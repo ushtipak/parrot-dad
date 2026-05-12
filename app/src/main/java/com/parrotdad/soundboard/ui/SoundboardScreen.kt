@@ -5,26 +5,37 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -36,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.parrotdad.soundboard.audio.SoundPlayer
 import com.parrotdad.soundboard.data.SoundItem
+import com.parrotdad.soundboard.data.UserPreferences
 import com.parrotdad.soundboard.ui.theme.buttonColors
 
 /**
@@ -48,14 +60,25 @@ fun SoundboardScreen(items: List<SoundItem>) {
     val context = LocalContext.current
     val soundPlayer = remember { SoundPlayer() }
 
-    // Release audio resources when this composable leaves composition
-    DisposableEffect(Unit) {
-        onDispose {
-            soundPlayer.stopAndRelease()
+    var editMode by remember { mutableStateOf(false) }
+
+    // Track which item is currently showing the record dialog
+    var recordingItem by remember { mutableStateOf<SoundItem?>(null) }
+
+    // Map of key -> custom path (null = use default). Initialised from prefs.
+    val customPaths = remember {
+        mutableStateMapOf<String, String?>().also { map ->
+            items.forEach { item ->
+                val path = UserPreferences.getCustomPath(context, item.key)
+                if (path != null) map[item.key] = path
+            }
         }
     }
 
-    // Startup bounce for the whole grid
+    DisposableEffect(Unit) {
+        onDispose { soundPlayer.stopAndRelease() }
+    }
+
     val gridScale = remember { Animatable(0.85f) }
     LaunchedEffect(Unit) {
         gridScale.animateTo(
@@ -67,31 +90,59 @@ fun SoundboardScreen(items: List<SoundItem>) {
         )
     }
 
+    val bgColor by animateColorAsState(
+        targetValue = if (editMode) Color(0xFFFFF0F0) else Color(0xFFFFF8F0),
+        label = "bg_top"
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(Color(0xFFFFF8F0), Color(0xFFF0F4FF))
-                )
-            )
+            .background(Brush.verticalGradient(listOf(bgColor, Color(0xFFF0F4FF))))
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // App title bar
-            Text(
-                text = "🦜 ParrotDad",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary,
+            // ── Title bar + edit toggle ──
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 32.dp, bottom = 8.dp, start = 16.dp, end = 16.dp)
-            )
+                    .padding(top = 32.dp, bottom = 4.dp, start = 16.dp, end = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "🦜 ParrotDad",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                FilterChip(
+                    selected = editMode,
+                    onClick = {
+                        editMode = !editMode
+                        if (!editMode) soundPlayer.stopAndRelease()
+                    },
+                    label = { Text(if (editMode) "✓ Done" else "✏️ Edit") },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                )
+            }
 
-            // 3x3 grid with startup bounce
+            // Edit mode hint
+            AnimatedVisibility(visible = editMode, enter = fadeIn(), exit = fadeOut()) {
+                Text(
+                    text = "Tap a button to record your own voice",
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+            }
+
+            // ── 3×3 grid ──
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
                 modifier = Modifier
@@ -103,17 +154,44 @@ fun SoundboardScreen(items: List<SoundItem>) {
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 itemsIndexed(items) { index, item ->
+                    val customPath = customPaths[item.key]
                     SoundButton(
                         emoji = item.emoji,
                         label = item.label,
                         backgroundColor = buttonColors[index % buttonColors.size],
+                        editMode = editMode,
+                        hasCustomSound = customPath != null,
                         onClick = {
                             triggerHaptic(context)
-                            soundPlayer.play(context, item.audioResId)
+                            soundPlayer.playCustomOrFallback(context, customPath, item.audioResId)
+                        },
+                        onEditClick = {
+                            soundPlayer.stopAndRelease()
+                            recordingItem = item
                         }
                     )
                 }
             }
+        }
+
+        // ── Record dialog ──
+        recordingItem?.let { item ->
+            RecordDialog(
+                itemKey = item.key,
+                itemLabel = item.label,
+                hasExisting = customPaths[item.key] != null,
+                onSave = { savedPath ->
+                    UserPreferences.setCustomPath(context, item.key, savedPath)
+                    customPaths[item.key] = savedPath
+                    recordingItem = null
+                },
+                onRevert = {
+                    UserPreferences.clearCustomPath(context, item.key)
+                    customPaths.remove(item.key)
+                    recordingItem = null
+                },
+                onDismiss = { recordingItem = null }
+            )
         }
     }
 }

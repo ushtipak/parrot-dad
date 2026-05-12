@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-23:12
-INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-23:12
-INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-23:12
-INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-23:12
+ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:1-25:12
 MERGED from [androidx.compose.material3:material3-android:1.3.2] C:\Users\m\.gradle\caches\8.11.1\transforms\bd3ce5151ab401e532e34a3a69d72a74\transformed\material3-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material:material-android:1.8.1] C:\Users\m\.gradle\caches\8.11.1\transforms\14ecef3ae5e7e9dca46bf6a570bc3d5c\transformed\material-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.material:material-ripple-android:1.8.1] C:\Users\m\.gradle\caches\8.11.1\transforms\8c10ea9cfb33f58fe7bdf967a8ead071\transformed\material-ripple-release\AndroidManifest.xml:2:1-7:12
@@ -59,9 +59,13 @@ MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\m\.gradle\caches\8.
 		INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:4:5-71
+	android:name
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:4:22-68
 application
-ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:4:5-21:19
-INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:4:5-21:19
+ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:6:5-23:19
+INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:6:5-23:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.8.1] C:\Users\m\.gradle\caches\8.11.1\transforms\6663fd1c73430681688865173e74823a\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.8.1] C:\Users\m\.gradle\caches\8.11.1\transforms\6663fd1c73430681688865173e74823a\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.8.1] C:\Users\m\.gradle\caches\8.11.1\transforms\a8b6ae63bb6ef56d152b23bff4bd2389\transformed\ui-test-manifest-1.8.1\AndroidManifest.xml:22:5-27:19
@@ -83,37 +87,37 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\m\.gradle\caches\8
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.16.0] C:\Users\m\.gradle\caches\8.11.1\transforms\9a42abb6d6494ce25d6213be6f37263e\transformed\core-1.16.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:9:9-35
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:11:9-35
 	android:label
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:7:9-41
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:9:9-41
 	android:roundIcon
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:8:9-54
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:10:9-54
 	android:icon
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:6:9-43
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:8:9-43
 	android:allowBackup
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:5:9-35
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:7:9-35
 	android:theme
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:10:9-47
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:12:9-47
 activity#com.parrotdad.soundboard.MainActivity
-ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:11:9-20:20
+ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:13:9-22:20
 	android:screenOrientation
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:14:13-49
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:16:13-49
 	android:windowSoftInputMode
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:15:13-55
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:17:13-55
 	android:exported
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:13:13-36
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:15:13-36
 	android:name
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:12:13-41
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:14:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:16:13-19:29
+ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:18:13-21:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:17:17-69
+ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:19:17-69
 	android:name
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:17:25-66
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:19:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:18:17-77
+ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:20:17-77
 	android:name
-		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:18:27-74
+		ADDED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml:20:27-74
 uses-sdk
 INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\m\repo\ParrotDad\app\src\main\AndroidManifest.xml
