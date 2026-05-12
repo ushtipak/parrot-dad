@@ -5,6 +5,7 @@ import androidx.core.content.edit
 
 private const val PREFS_NAME = "soundboard_prefs"
 private const val PREFIX = "custom_path_"
+private const val EMOJI_PREFIX = "custom_emoji_"
 
 /**
  * Lightweight SharedPreferences wrapper that persists custom recording paths.
@@ -23,6 +24,15 @@ object UserPreferences {
 
     fun hasCustomSound(context: Context, key: String): Boolean =
         getCustomPath(context, key) != null
+
+    fun getCustomEmoji(context: Context, key: String): String? =
+        prefs(context).getString(EMOJI_PREFIX + key, null)
+
+    fun setCustomEmoji(context: Context, key: String, emoji: String) =
+        prefs(context).edit { putString(EMOJI_PREFIX + key, emoji) }
+
+    fun clearCustomEmoji(context: Context, key: String) =
+        prefs(context).edit { remove(EMOJI_PREFIX + key) }
 
     private fun prefs(context: Context) =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)

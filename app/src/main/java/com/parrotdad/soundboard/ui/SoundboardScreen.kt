@@ -64,6 +64,8 @@ fun SoundboardScreen(items: List<SoundItem>) {
 
     // Track which item is currently showing the record dialog
     var recordingItem by remember { mutableStateOf<SoundItem?>(null) }
+    // Track which item is currently showing the emoji picker
+    var emojiItem by remember { mutableStateOf<SoundItem?>(null) }
 
     // Map of key -> custom path (null = use default). Initialised from prefs.
     val customPaths = remember {
@@ -71,6 +73,16 @@ fun SoundboardScreen(items: List<SoundItem>) {
             items.forEach { item ->
                 val path = UserPreferences.getCustomPath(context, item.key)
                 if (path != null) map[item.key] = path
+            }
+        }
+    }
+
+    // Map of key -> custom emoji (null = use default). Initialised from prefs.
+    val customEmojis = remember {
+        mutableStateMapOf<String, String?>().also { map ->
+            items.forEach { item ->
+                val emoji = UserPreferences.getCustomEmoji(context, item.key)
+                if (emoji != null) map[item.key] = emoji
             }
         }
     }
@@ -135,7 +147,7 @@ fun SoundboardScreen(items: List<SoundItem>) {
             // Edit mode hint
             AnimatedVisibility(visible = editMode, enter = fadeIn(), exit = fadeOut()) {
                 Text(
-                    text = "Tap a button to record your own voice",
+                    text = "🖼 change icon  ·  🎙 record sound",
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(bottom = 4.dp)
@@ -155,12 +167,14 @@ fun SoundboardScreen(items: List<SoundItem>) {
             ) {
                 itemsIndexed(items) { index, item ->
                     val customPath = customPaths[item.key]
+                    val customEmoji = customEmojis[item.key]
                     SoundButton(
-                        emoji = item.emoji,
+                        emoji = customEmoji ?: item.emoji,
                         label = item.label,
                         backgroundColor = buttonColors[index % buttonColors.size],
                         editMode = editMode,
                         hasCustomSound = customPath != null,
+                        hasCustomEmoji = customEmoji != null,
                         onClick = {
                             triggerHaptic(context)
                             soundPlayer.playCustomOrFallback(context, customPath, item.audioResId)
@@ -168,10 +182,32 @@ fun SoundboardScreen(items: List<SoundItem>) {
                         onEditClick = {
                             soundPlayer.stopAndRelease()
                             recordingItem = item
+                        },
+                        onEmojiClick = {
+                            emojiItem = item
                         }
                     )
                 }
             }
+        }
+
+        // ── Emoji picker dialog ──
+        emojiItem?.let { item ->
+            EmojiPickerDialog(
+                currentEmoji = customEmojis[item.key] ?: item.emoji,
+                defaultEmoji = item.emoji,
+                onPick = { chosen ->
+                    UserPreferences.setCustomEmoji(context, item.key, chosen)
+                    customEmojis[item.key] = chosen
+                    emojiItem = null
+                },
+                onReset = {
+                    UserPreferences.clearCustomEmoji(context, item.key)
+                    customEmojis.remove(item.key)
+                    emojiItem = null
+                },
+                onDismiss = { emojiItem = null }
+            )
         }
 
         // ── Record dialog ──

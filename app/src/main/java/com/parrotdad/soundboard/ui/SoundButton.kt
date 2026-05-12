@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -43,7 +44,9 @@ import androidx.compose.ui.unit.sp
  * @param onClick         Called when the button is tapped (play mode).
  * @param editMode        When true, tapping opens the record dialog instead of playing.
  * @param hasCustomSound  Whether a custom recording exists for this button.
- * @param onEditClick     Called when the button is tapped in edit mode.
+ * @param hasCustomEmoji  Whether a custom emoji is set for this button.
+ * @param onEditClick     Called when the button body is tapped in edit mode (record sound).
+ * @param onEmojiClick    Called when the emoji badge is tapped in edit mode (change icon).
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +58,9 @@ fun SoundButton(
     modifier: Modifier = Modifier,
     editMode: Boolean = false,
     hasCustomSound: Boolean = false,
-    onEditClick: () -> Unit = {}
+    hasCustomEmoji: Boolean = false,
+    onEditClick: () -> Unit = {},
+    onEmojiClick: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -116,15 +121,16 @@ fun SoundButton(
             }
         }
 
-        // Badge: mic icon in edit mode; green dot when custom sound exists
         if (editMode) {
+            // Top-right: mic badge (tap = record sound)
             Box(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(6.dp)
                     .size(22.dp)
                     .clip(CircleShape)
-                    .background(if (hasCustomSound) Color(0xFF43A047) else Color(0xFF6750A4)),
+                    .background(if (hasCustomSound) Color(0xFF43A047) else Color(0xFF6750A4))
+                    .clickable(onClick = onEditClick),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -133,8 +139,25 @@ fun SoundButton(
                     textAlign = TextAlign.Center
                 )
             }
-        } else if (hasCustomSound) {
-            // Subtle green dot in normal mode to indicate a custom sound exists
+            // Top-left: emoji badge (tap = change icon)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(6.dp)
+                    .size(22.dp)
+                    .clip(CircleShape)
+                    .background(if (hasCustomEmoji) Color(0xFFFF8F00) else Color(0xFF78909C))
+                    .clickable(onClick = onEmojiClick),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = if (hasCustomEmoji) "✓" else "🖼",
+                    fontSize = 11.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+        } else if (hasCustomSound || hasCustomEmoji) {
+            // Subtle dot(s) in normal mode
             Box(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
