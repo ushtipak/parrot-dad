@@ -7,9 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -30,7 +28,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,7 +36,6 @@ import androidx.compose.ui.unit.sp
  * A single square soundboard button with bounce animation and ripple feedback.
  *
  * @param emoji           The emoji displayed prominently in the centre.
- * @param label           Short text label shown below the emoji.
  * @param backgroundColor Pastel card background colour.
  * @param onClick         Called when the button is tapped (play mode).
  * @param editMode        When true, tapping opens the record dialog instead of playing.
@@ -52,7 +48,6 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SoundButton(
     emoji: String,
-    label: String,
     backgroundColor: Color,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -84,10 +79,7 @@ fun SoundButton(
                 .fillMaxSize()
                 .scale(scale)
                 .semantics {
-                    contentDescription = if (editMode)
-                        "Edit $label sound"
-                    else
-                        "Play $label reminder"
+                    contentDescription = if (editMode) "Edit sound" else "Play sound"
                 },
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = cardColor),
@@ -97,26 +89,14 @@ fun SoundButton(
             ),
             interactionSource = interactionSource
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = emoji,
                     fontSize = 42.sp,
                     textAlign = TextAlign.Center
-                )
-                Text(
-                    text = label,
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center,
-                    color = Color(0xFF3A3A3A),
-                    letterSpacing = 0.3.sp,
-                    modifier = Modifier.padding(top = 4.dp)
                 )
             }
         }

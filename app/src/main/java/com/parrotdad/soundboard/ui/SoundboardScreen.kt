@@ -170,7 +170,6 @@ fun SoundboardScreen(items: List<SoundItem>) {
                     val customEmoji = customEmojis[item.key]
                     SoundButton(
                         emoji = customEmoji ?: item.emoji,
-                        label = item.label,
                         backgroundColor = buttonColors[index % buttonColors.size],
                         editMode = editMode,
                         hasCustomSound = customPath != null,
@@ -214,7 +213,7 @@ fun SoundboardScreen(items: List<SoundItem>) {
         recordingItem?.let { item ->
             RecordDialog(
                 itemKey = item.key,
-                itemLabel = item.label,
+                itemLabel = item.key,
                 hasExisting = customPaths[item.key] != null,
                 onSave = { savedPath ->
                     UserPreferences.setCustomPath(context, item.key, savedPath)
