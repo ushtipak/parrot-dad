@@ -41,8 +41,10 @@ import androidx.compose.ui.unit.sp
  * @param editMode        When true, tapping opens the record dialog instead of playing.
  * @param hasCustomSound  Whether a custom recording exists for this button.
  * @param hasCustomEmoji  Whether a custom emoji is set for this button.
+ * @param repeatCount     How many times the sound plays consecutively (1–5).
  * @param onEditClick     Called when the button body is tapped in edit mode (record sound).
  * @param onEmojiClick    Called when the emoji badge is tapped in edit mode (change icon).
+ * @param onRepeatClick   Called when the repeat badge is tapped in edit mode (cycle count).
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,8 +56,10 @@ fun SoundButton(
     editMode: Boolean = false,
     hasCustomSound: Boolean = false,
     hasCustomEmoji: Boolean = false,
+    repeatCount: Int = 1,
     onEditClick: () -> Unit = {},
-    onEmojiClick: () -> Unit = {}
+    onEmojiClick: () -> Unit = {},
+    onRepeatClick: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -137,7 +141,7 @@ fun SoundButton(
                 )
             }
         } else if (hasCustomSound || hasCustomEmoji) {
-            // Subtle dot(s) in normal mode
+            // Subtle dot in normal mode to indicate customisation
             Box(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
@@ -145,6 +149,28 @@ fun SoundButton(
                     .size(10.dp)
                     .clip(CircleShape)
                     .background(Color(0xFF43A047))
+            )
+        }
+
+        // Bottom-left: repeat count badge — always visible, tappable in edit mode
+        val repeatIsDefault = repeatCount <= 1
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(6.dp)
+                .size(22.dp)
+                .clip(CircleShape)
+                .background(
+                    if (repeatIsDefault) Color(0x55000000) else Color(0xFFE65100)
+                )
+                .then(if (editMode) Modifier.clickable(onClick = onRepeatClick) else Modifier),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "×$repeatCount",
+                fontSize = 10.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center
             )
         }
     }

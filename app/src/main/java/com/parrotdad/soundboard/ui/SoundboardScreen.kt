@@ -87,6 +87,15 @@ fun SoundboardScreen(items: List<SoundItem>) {
         }
     }
 
+    // Map of key -> repeat count (default 1). Initialised from prefs.
+    val repeatCounts = remember {
+        mutableStateMapOf<String, Int>().also { map ->
+            items.forEach { item ->
+                map[item.key] = UserPreferences.getRepeatCount(context, item.key)
+            }
+        }
+    }
+
     DisposableEffect(Unit) {
         onDispose { soundPlayer.stopAndRelease() }
     }
@@ -168,15 +177,17 @@ fun SoundboardScreen(items: List<SoundItem>) {
                 itemsIndexed(items) { index, item ->
                     val customPath = customPaths[item.key]
                     val customEmoji = customEmojis[item.key]
+                    val repeat = repeatCounts[item.key] ?: 1
                     SoundButton(
                         emoji = customEmoji ?: item.emoji,
                         backgroundColor = buttonColors[index % buttonColors.size],
                         editMode = editMode,
                         hasCustomSound = customPath != null,
                         hasCustomEmoji = customEmoji != null,
+                        repeatCount = repeat,
                         onClick = {
                             triggerHaptic(context)
-                            soundPlayer.playCustomOrFallback(context, customPath, item.audioResId)
+                            soundPlayer.playCustomOrFallback(context, customPath, item.audioResId, repeat)
                         },
                         onEditClick = {
                             soundPlayer.stopAndRelease()
@@ -184,6 +195,11 @@ fun SoundboardScreen(items: List<SoundItem>) {
                         },
                         onEmojiClick = {
                             emojiItem = item
+                        },
+                        onRepeatClick = {
+                            val next = if (repeat >= 5) 1 else repeat + 1
+                            UserPreferences.setRepeatCount(context, item.key, next)
+                            repeatCounts[item.key] = next
                         }
                     )
                 }

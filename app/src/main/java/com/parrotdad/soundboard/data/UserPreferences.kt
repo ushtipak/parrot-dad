@@ -34,6 +34,12 @@ object UserPreferences {
     fun clearCustomEmoji(context: Context, key: String) =
         prefs(context).edit { remove(EMOJI_PREFIX + key) }
 
+    fun getRepeatCount(context: Context, key: String): Int =
+        prefs(context).getInt("repeat_$key", 1)
+
+    fun setRepeatCount(context: Context, key: String, count: Int) =
+        prefs(context).edit { putInt("repeat_$key", count.coerceIn(1, 5)) }
+
     private fun prefs(context: Context) =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 }
