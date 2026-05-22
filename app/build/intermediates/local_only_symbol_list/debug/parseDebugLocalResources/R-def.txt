@@ -13,5 +13,6 @@ raw sound_shoes
 raw sound_teeth
 raw sound_towel
 raw sound_toys
+raw violin
 string app_name
 style Theme.ParrotDad

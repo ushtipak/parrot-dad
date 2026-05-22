@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.FilterChip
@@ -56,7 +57,7 @@ import com.parrotdad.soundboard.ui.theme.buttonColors
  * always cleaned up when the screen leaves composition (e.g. app backgrounded).
  */
 @Composable
-fun SoundboardScreen(items: List<SoundItem>) {
+fun SoundboardScreen(items: List<SoundItem>, wideItem: SoundItem? = null) {
     val context = LocalContext.current
     val soundPlayer = remember { SoundPlayer() }
 
@@ -174,7 +175,7 @@ fun SoundboardScreen(items: List<SoundItem>) {
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                itemsIndexed(items) { index, item ->
+                itemsIndexed(items, span = { _, _ -> GridItemSpan(1) }) { index, item ->
                     val customPath = customPaths[item.key]
                     val customEmoji = customEmojis[item.key]
                     val repeat = repeatCounts[item.key] ?: 1
@@ -202,6 +203,32 @@ fun SoundboardScreen(items: List<SoundItem>) {
                             repeatCounts[item.key] = next
                         }
                     )
+                }
+
+                // ── Full-width tile at the bottom ──
+                wideItem?.let { wide ->
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        val wideCustomPath = customPaths[wide.key]
+                        val wideCustomEmoji = customEmojis[wide.key]
+                        SoundButton(
+                            emoji = wideCustomEmoji ?: wide.emoji,
+                            backgroundColor = Color(0xFFE8EAF6),
+                            editMode = editMode,
+                            hasCustomSound = wideCustomPath != null,
+                            hasCustomEmoji = wideCustomEmoji != null,
+                            repeatCount = 1,
+                            squareAspect = false,
+                            onClick = {
+                                triggerHaptic(context)
+                                soundPlayer.playCustomOrFallback(context, wideCustomPath, wide.audioResId, 1)
+                            },
+                            onEditClick = {
+                                soundPlayer.stopAndRelease()
+                                recordingItem = wide
+                            },
+                            onEmojiClick = { emojiItem = wide }
+                        )
+                    }
                 }
             }
         }

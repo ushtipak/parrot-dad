@@ -17,3 +17,5 @@ val soundboardItems: List<SoundItem> = listOf(
     SoundItem(key = "bedtime", emoji = "🛏️", audioResId = R.raw.sound_bedtime),
     SoundItem(key = "quiet",   emoji = "🤫",  audioResId = R.raw.sound_quiet)
 )
+
+val violinItem = SoundItem(key = "violin", emoji = "🎻", audioResId = R.raw.violin)

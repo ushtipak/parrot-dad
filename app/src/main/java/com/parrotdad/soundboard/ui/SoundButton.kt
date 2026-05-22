@@ -10,6 +10,8 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -57,6 +59,7 @@ fun SoundButton(
     hasCustomSound: Boolean = false,
     hasCustomEmoji: Boolean = false,
     repeatCount: Int = 1,
+    squareAspect: Boolean = true,
     onEditClick: () -> Unit = {},
     onEmojiClick: () -> Unit = {},
     onRepeatClick: () -> Unit = {}
@@ -76,7 +79,7 @@ fun SoundButton(
     // In edit mode dim the card slightly to signal it's editable
     val cardColor = if (editMode) backgroundColor.copy(alpha = 0.75f) else backgroundColor
 
-    Box(modifier = modifier.aspectRatio(1f)) {
+    Box(modifier = if (squareAspect) modifier.aspectRatio(1f) else modifier.fillMaxWidth().height(88.dp)) {
         Card(
             onClick = if (editMode) onEditClick else onClick,
             modifier = Modifier

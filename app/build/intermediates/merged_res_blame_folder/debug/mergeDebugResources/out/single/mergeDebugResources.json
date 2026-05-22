@@ -1,62 +1,54 @@
 [
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_off.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_off.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_off.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_off.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_bedtime.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_bedtime.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_shoes.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_shoes.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\mipmap-mdpi_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\mipmap-mdpi\\ic_launcher_round.xml"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/mipmap-mdpi_ic_launcher.xml.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/mipmap-mdpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_bedtime.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_bedtime.mp3"
     },
     {
         "merged": "com.parrotdad.soundboard.app-debug-47:/drawable_ic_launcher_foreground.xml.flat",
         "source": "com.parrotdad.soundboard.app-main-49:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_shoes.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_shoes.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_hands.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_hands.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_toys.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_toys.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_quiet.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_quiet.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\drawable\\ic_launcher_foreground.xml"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_toys.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_toys.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_clothes.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_clothes.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_towel.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_towel.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_please.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_please.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_please.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_please.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_towel.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_towel.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/mipmap-mdpi_ic_launcher_round.xml.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/mipmap-mdpi/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_teeth.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_teeth.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_violin.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/violin.mp3"
     },
     {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_dishes.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_dishes.mp3"
-    },
-    {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\mipmap-mdpi_ic_launcher.xml.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\mipmap-mdpi\\ic_launcher.xml"
-    },
-    {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_quiet.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_quiet.mp3"
-    },
-    {
-        "merged": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-debug-47:\\raw_sound_hands.mp3.flat",
-        "source": "C:\\Users\\m\\.gradle\\daemon\\8.11.1\\com.parrotdad.soundboard.app-main-49:\\raw\\sound_hands.mp3"
+        "merged": "com.parrotdad.soundboard.app-debug-47:/raw_sound_teeth.mp3.flat",
+        "source": "com.parrotdad.soundboard.app-main-49:/raw/sound_teeth.mp3"
     }
 ]

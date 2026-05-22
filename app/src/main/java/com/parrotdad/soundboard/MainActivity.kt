@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.parrotdad.soundboard.data.soundboardItems
+import com.parrotdad.soundboard.data.violinItem
 import com.parrotdad.soundboard.ui.SoundboardScreen
 import com.parrotdad.soundboard.ui.theme.ParrotDadTheme
 
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ParrotDadTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    SoundboardScreen(items = soundboardItems)
+                    SoundboardScreen(items = soundboardItems, wideItem = violinItem)
                 }
             }
         }
